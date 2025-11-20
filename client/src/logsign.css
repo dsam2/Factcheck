@@ -1,0 +1,81 @@
+/* Background same as your website pastel theme */
+.auth-body {
+    background: #0E1D4A;
+    font-family: "Times New Roman", serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+/* Main white box */
+.auth-box {
+    background: #fff;
+    width: 380px;
+    padding: 40px;
+    border: 1.5px solid black;
+    border-radius: 4px;
+    box-shadow: 0px 4px 15px rgba(0,0,0,0.08);
+    text-align: center;
+}
+
+/* Titles */
+.auth-title {
+    font-size: 30px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    margin-bottom: 5px;
+}
+
+.auth-sub {
+    font-size: 14px;
+    color: #444;
+    margin-bottom: 25px;
+}
+
+/* Labels */
+label {
+    display: block;
+    text-align: left;
+    margin-bottom: 5px;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+}
+
+/* Inputs */
+input {
+    width: 100%;
+    padding: 10px;
+    border: 1.5px solid #000;
+    margin-bottom: 18px;
+    font-size: 15px;
+}
+
+/* Buttons */
+.auth-btn {
+    width: 100%;
+    padding: 10px;
+    background: #EFF4DD;
+    border: 2px solid black;
+    cursor: pointer;
+    letter-spacing: 1px;
+    font-size: 16px;
+}
+
+.auth-btn:hover {
+    background: black;
+    color: white;
+}
+
+/* Switch text */
+.switch-text {
+    margin-top: 15px;
+    font-size: 14px;
+}
+
+.switch-text a {
+    color: black;
+    font-weight: bold;
+    text-decoration: underline;
+}

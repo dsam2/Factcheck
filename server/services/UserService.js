@@ -1,3 +1,4 @@
+const bcrypt = require('bcrypt')
 const User = require('../model/User');
  
 /**
@@ -12,14 +13,28 @@ class UserService {
    */
   async createUser(userData) {
     try {
+
       const user = new User(userData);
       const savedUser = await user.save();
+      const existinguser = await User.findOne({ email: userData.email });
+
+     
+      if (existinguser) {
+        return{ success: false, message: 'Email already exists'};        
+      }
+      const hashedpassword = await bcrypt.hash(userData.password, 10);
+      userData.password = hashedpassword;
+
       return {
         success: true,
         data: savedUser,
         message: 'User created successfully',
       };
-    } catch (error) {
+
+
+      
+    } 
+      catch (error) {
       return {
         success: false,
         error: error.message,

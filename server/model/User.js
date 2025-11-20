@@ -14,22 +14,11 @@ const userSchema = new mongoose.Schema(
       lowercase: true,
       match: /.+\@.+\..+/,
     },
-    age: {
-      type: Number,
-      min: 15,
-    },
-    phone: {
-      type: String,
-      trim: true,
-    },
-    isActive: {
-      type: Boolean,
-      default: true,
-    },
+    password:{ String }
   },
   {
     timestamps: true,
   }
 );
  
-module.exports = mongoose.model('User', userSchema);
+module.exports = mongoose.model('Users', userSchema);

@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>News Detector</title>
+     <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Merriweather:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <link rel="stylesheet" href="news.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        royal: '#0A2463',
+                        emerald: '#2E7D32',
+                        crimson: '#D32F2F',
+                        amber: '#FFA000',
+                        slate: '#F1F5F9'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Merriweather', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    
+</head>
+<body>
+<header>
+
+    <!-- TOP MINI NAV (Optional like image) -->
+    <div class="mini-top">
+        <div class="left-logo">NEWS DETECTOR</div>
+        <div class="center-title">
+            DAILY NEWS DIGEST
+           <div id="liveClock"></div>
+        </div>
+
+        <div class="right-info">Verified • Trusted • Accurate</div>
+    </div>
+
+    <!-- MAIN NAV -->
+
+    <nav class="main-nav">
+        <ul class="category-links">
+            <li><a href="#">Latest</a></li>
+            <li><a href="#">Fact Check</a></li>
+            <li><a href="#">Viral Claims</a></li>
+            <li><a href="#">Politics</a></li>
+            <li><a href="#">Technology</a></li>
+            <li><a href="#">Health</a></li>
+            <li><a href="#">World</a></li>
+            <li><a href="#">Report A Fake</a></li>
+        </ul>
+
+  
+         <a href="login.html" class="profile-icon">
+        <i class="fa-solid fa-user"></i>
+        </a>
+    </nav>
+
+</header>
+
+
+    
+    <main class="flex-grow flex flex-col justify-center relative overflow-hidden">
+        
+        <!-- Background Decorative Elements -->
+        <div class="absolute top-0 left-0 w-full h-full overflow-hidden -z-10">
+            <div class="absolute -top-24 -left-24 w-96 h-96 bg-blue-100 rounded-full mix-blend-multiply filter blur-3xl opacity-70"></div>
+            <div class="absolute top-1/2 -right-24 w-72 h-72 bg-purple-100 rounded-full mix-blend-multiply filter blur-3xl opacity-70"></div>
+        </div>
+
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 w-full text-center pt-12 pb-20">
+            
+            <!-- Hero Text -->
+            <div class="mb-10">
+                <span class="inline-block py-1 px-3 rounded-full bg-blue-50 text-royal text-xs font-semibold tracking-wide uppercase mb-4 border border-blue-100">
+                    <i class="fa-solid fa-check-circle mr-1"></i> Trusted by 10k+ Journalists
+                </span>
+                <h1 class="text-4xl md:text-6xl font-bold text-gray-900 tracking-tight mb-4">
+                    Verify what you read <br>
+                    <span class="text-gradient">in seconds.</span>
+                </h1>
+                <p class="mt-4 max-w-2xl mx-auto text-xl text-gray-500 font-serif italic">
+                    "Falsehood flies, and truth comes limping after it." <br>
+                    <span class="text-sm not-italic font-sans text-gray-400 mt-2 block">- We help the truth catch up.</span>
+                </p>
+            </div>
+
+            <!-- The Detector Interface Card -->
+            <div class="bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden max-w-3xl mx-auto transform transition hover:scale-[1.01] duration-300">
+                
+                <!-- Tabs -->
+                <div class="flex border-b border-gray-100 bg-gray-50">
+                    <button id="tab-url" onclick="switchTab('url')" class="flex-1 py-4 text-sm font-semibold text-royal border-b-2 border-royal bg-white focus:outline-none transition-colors duration-200">
+                        <i class="fa-solid fa-link mr-2"></i> Check URL
+                    </button>
+                    <button id="tab-text" onclick="switchTab('text')" class="flex-1 py-4 text-sm font-medium text-gray-500 hover:text-gray-700 focus:outline-none transition-colors duration-200">
+                        <i class="fa-solid fa-quote-left mr-2"></i> Check Text
+                    </button>
+                </div>
+
+                <!-- Input Area -->
+                <div class="p-6 md:p-8">
+                    
+                    <!-- URL Input Form -->
+                    <div id="content-url" class="block">
+                        <div class="relative rounded-md shadow-sm">
+                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                <span class="text-gray-400 sm:text-sm">https://</span>
+                            </div>
+                            <input type="text" id="url-input" class="focus:ring-royal focus:border-royal block w-full pl-16 pr-12 sm:text-lg border-gray-300 rounded-lg py-4 bg-gray-50 focus:bg-white transition-all" placeholder="www.news-site.com/article...">
+                            <div class="absolute inset-y-0 right-0 flex items-center">
+                                <button onclick="clearInput('url-input')" class="p-2 text-gray-400 hover:text-gray-600 focus:outline-none">
+                                    <i class="fa-solid fa-xmark"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <p class="text-left text-xs text-gray-400 mt-2 ml-1">Supported: News articles, blog posts, social media permalinks.</p>
+                    </div>
+
+                    <!-- Text Input Form -->
+                    <div id="content-text" class="hidden">
+                        <textarea id="text-input" rows="4" class="shadow-sm focus:ring-royal focus:border-royal block w-full sm:text-base border-gray-300 rounded-lg bg-gray-50 focus:bg-white transition-all p-4 resize-none" placeholder="Paste the suspicious text, WhatsApp forward, or email content here..."></textarea>
+                        <div class="flex justify-between items-center mt-2">
+                            <p class="text-xs text-gray-400 ml-1">Min 50 characters for accurate analysis.</p>
+                            <span class="text-xs text-gray-400" id="char-count">0 chars</span>
+                        </div>
+                    </div>
+
+                    <!-- Action Button -->
+                    <div class="mt-6">
+                        <button onclick="analyze()" id="analyze-btn" class="w-full flex justify-center items-center py-4 px-4 border border-transparent rounded-lg shadow-lg text-lg font-medium text-white bg-royal hover:bg-blue-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-royal transition-all transform active:scale-95">
+                            <span>Analyze Veracity</span>
+                            <i class="fa-solid fa-arrow-right ml-2"></i>
+                        </button>
+                    </div>
+
+                    <!-- Mock Loading State (Hidden by default) -->
+                    <div id="loading-state" class="hidden mt-6">
+                        <div class="flex items-center justify-center space-x-2 animate-pulse">
+                            <div class="w-2 h-2 bg-royal rounded-full"></div>
+                            <div class="w-2 h-2 bg-royal rounded-full"></div>
+                            <div class="w-2 h-2 bg-royal rounded-full"></div>
+                            <span class="text-sm text-royal font-medium ml-2">Scanning Sources...</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Footer of Card -->
+                <div class="bg-gray-50 px-6 py-4 border-t border-gray-100 flex flex-wrap items-center justify-center gap-4 md:justify-between">
+                    <span class="text-xs text-gray-500 font-semibold uppercase tracking-wider">Powered By:</span>
+                    <div class="flex space-x-4 opacity-60 grayscale hover:grayscale-0 transition-all duration-300">
+                        <!-- Mock Logos using FontAwesome as placeholders -->
+                        <div class="flex items-center space-x-1" title="Google Fact Check">
+                            <i class="fa-brands fa-google text-gray-600"></i>
+                            <span class="text-xs font-bold text-gray-600">FactCheck</span>
+                        </div>
+                        <div class="flex items-center space-x-1" title="Snopes Data">
+                            <i class="fa-solid fa-magnifying-glass text-gray-600"></i>
+                            <span class="text-xs font-bold text-gray-600">Snopes</span>
+                        </div>
+                        <div class="flex items-center space-x-1" title="OpenSources">
+                            <i class="fa-solid fa-database text-gray-600"></i>
+                            <span class="text-xs font-bold text-gray-600">OpenSources</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    <footer class="bg-white border-t border-gray-200 py-3 relative z-10">
+        <div class="flex items-center max-w-7xl mx-auto px-4">
+            <div class="flex-shrink-0 bg-crimson text-white text-xs font-bold px-2 py-1 rounded mr-4 animate-pulse">
+                LIVE ALERTS
+            </div>
+            <div class="ticker-wrap w-full overflow-hidden relative">
+                <div class="ticker">
+                    <span class="inline-block mr-10 text-sm text-gray-600"><i class="fa-solid fa-xmark text-crimson mr-1"></i> Viral "Shark in Mall" photo is <strong>FAKE</strong> (CGI)</span>
+                    <span class="inline-block mr-10 text-sm text-gray-600"><i class="fa-solid fa-triangle-exclamation text-amber mr-1"></i> New Tax Law rumors are <strong>MISLEADING</strong> (Missing Context)</span>
+                    <span class="inline-block mr-10 text-sm text-gray-600"><i class="fa-solid fa-check text-emerald mr-1"></i> Celebrity donation news is <strong>VERIFIED</strong></span>
+                    <span class="inline-block mr-10 text-sm text-gray-600"><i class="fa-solid fa-xmark text-crimson mr-1"></i> "Free iPhone" link is a <strong>SCAM</strong></span>
+                    <span class="inline-block mr-10 text-sm text-gray-600"><i class="fa-solid fa-xmark text-crimson mr-1"></i> Moon landing denial video is <strong>DEBUNKED</strong></span>
+                </div>
+            </div>
+        </div>
+    </footer>
+</main>
+<!--footer-->
+  <footer>
+    <footer class="news-footer">
+    <div class="footer-container">
+
+        <div class="footer-section">
+            <h3>NEWS DETECTOR</h3>
+            <p>Your trusted platform to verify headlines and detect fake news instantly.</p>
+        </div>
+
+        <div class="footer-section">
+            <h4>Quick Links</h4>
+            <ul>
+                <li><a href="#">Latest News</a></li>
+                <li><a href="#">Trending</a></li>
+                <li><a href="#">Fact Check</a></li>
+                <li><a href="#">Report Fake News</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-section">
+            <h4>Contact Us</h4>
+            <p>Email: support@newsdetector.com</p>
+            <p>Phone: +91 998376784</p>
+        </div>
+
+        <div class="footer-section">
+            <h4>Follow Us</h4>
+            <div class="social-icons">
+                <a href="#"><img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" alt=""></a>
+                <a href="#"><img src="https://cdn-icons-png.flaticon.com/512/733/733558.png" alt=""></a>
+                <a href="#"><img src="https://cdn-icons-png.flaticon.com/512/733/733579.png" alt=""></a>
+            </div>
+        </div>
+
+    </div>
+
+    <p class="copy">© 2025 News Detector. All rights reserved.</p>
+</footer>
+  
+ <script src="news.js"></script>
+
+</body>
+
+
+
+</html>

@@ -76,19 +76,20 @@ router.get('/search/:term', async (req, res) => {
  */
 router.post('/', async (req, res) => {
   try {
-    const { name, email, age, phone, isActive } = req.body;
+    const { name, email, password, age, phone, isActive } = req.body;
  
     // Validation
-    if (!name || !email) {
+    if (!name || !email || !password) {
       return res.status(400).json({
         success: false,
-        message: 'Name and email are required',
+        message: 'Name, email, password are required',
       });
     }
  
     const userData = {
       name,
       email,
+      password,
       age,
       phone,
       isActive: isActive !== undefined ? isActive : true,
